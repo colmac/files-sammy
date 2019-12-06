@@ -1,0 +1,37 @@
+SQL Inserts for sample site
+
+Required endpoints:
+1. /v1/content/{siteId}/**
+2. /v1/contents/{siteId}/{type}
+3. /v1/contents-group/{siteId}/{groupName}
+4. /v1/content-references/{siteId}
+5. /v1/content-references/{siteId}/{type}
+6. /v1/content-name/{siteId}/{urlEncodedName}
+7. /v1/urls/{siteId}/{type}
+8. /v1/sitemap/{siteId}
+9. /v1/nav/{siteId}
+10. /v1/nav/{siteId}/{rootId}
+11. /v1/contents/{siteShortName}/{contentType}/tags
+12. /v1/tags/{siteShortName}
+13. /v2/nav/{siteId}
+
+* Dina to add conditional inserts so if file is rerun, data is only inserted one time.
+
+Site Content
+INSERT INTO "CONTENT_API"."SITE" (SITE_SHORTNAME, SITE_FULLNAME, SITE_BASEURL, SITE_OWNER, SITE_ACTIVE, SITE_STARTDATE, SITE_ENDDATE, AUTH_REQUIRED) VALUES ('sample-site', 'Sample Site', 'https://www.samplesite.nyc.gov', 'Sample Admin', 'Y', TO_DATE('2017-11-01 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2022-12-31 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), '0')
+
+INSERT INTO "CONTENT_API"."GENERIC_CONTENT" (IS_VISIBLE, GENERIC_CONTENT_NAME, GENERIC_CONTENT_TYPE, URL, SITE_SHORTNAME, CONTENT_TAGS, CONTENT_DESCRIPTION) VALUES ('Y', N'sample', N'Public', N'sample', 'samplesite', N'sampletag', 'This is some sample generic content for the sample site sample page.')
+// 1, 2, 4, 5, 6, 12
+
+INSERT INTO "CONTENT_API"."GENERIC_CONTENT_GROUP" (GENERIC_CONTENT_GROUP_NAME, GENERIC_CONTENT_GUID, SITE_SHORTNAME) VALUES ('Sample Content Group', '88022F39C39A44B2E054984BE16B1570', 'sample-site')
+// 3
+
+INSERT INTO "CONTENT_API"."NAV_ITEM" (NAV_ITEM_GENERIC_CONTENT_GUID, NAV_ITEM_PARENT_NAV_ITEM_GUID, NAV_ITEM_IS_VISIBLE, NAV_ITEM_POSITION, NAV_ITEM_OVERRIDE_NAME, SITE_SHORTNAME) VALUES ('88022F39C39A44B2E054984BE16B1570', '0', 'Y', '1', 'Sample 1', 'sample-site')
+// 8, 9, 10, 13
+
+// Request required for 11 took some troubleshooting. This worked: 
+// https://nyc-dev-web.csc.nycnet/content-api/v1/contents/sample-site/Public/tags?o=and&t=sampletag&t=tag2
+// 11
+
+// I cannot find endpoint 7. /v1/urls/{siteId}/{type} 
+

@@ -1,0 +1,7 @@
+update CONTENT_API.SITE
+set 
+AUTH_REQUIRED = 1, 
+SVC_ACCTNAME = 'ContentApi-Refapp-PRD', 
+SVC_ACCTPWD = 'UHhH8s/N3oBeMoYQrJoDB+O4Ycdnx+33Xo0lFWGj0WrLTzCFQ6Q8vC8qYH/Vr15t1SPFDErTNSkwtWPROKutmaElvKzZ0VYrhit+e33tyZA='
+where SITE_SHORTNAME = 'sample-site';
+

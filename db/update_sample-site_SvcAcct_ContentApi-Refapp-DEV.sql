@@ -1,0 +1,7 @@
+update CONTENT_API.SITE
+set 
+AUTH_REQUIRED = 1, 
+SVC_ACCTNAME = 'ContentApi-Refapp-DEV', 
+SVC_ACCTPWD = 'K+WohumQtLhOH4E7RCLwmm28R7q6x1/kt5Ne0eEtiZm2SoLyVR9jAHBXOUQduj2+315NMuVanWeTRqL2Po0cd887oKEUqS5ZAWmCBnV7Inw='
+where SITE_SHORTNAME = 'sample-site';
+
